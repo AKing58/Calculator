@@ -34,7 +34,7 @@ namespace Calculator
             inputTxt.Text += " = " + bedmas(splitInput);
         }
 
-        private double bedmas(String[] input)
+        private string bedmas(String[] input)
         {
             double output = 0;
             List<String> tempList = input.ToList();
@@ -43,12 +43,42 @@ namespace Calculator
             {
                 if(tempList[i] == "X") {
                     temp = double.Parse(tempList[i - 1]) * double.Parse(tempList[i+1]);
+                    tempList[i - 1] = temp.ToString();
+                    tempList.RemoveAt(i);
+                    tempList.RemoveAt(i);
                 }
                 else if(tempList[i] == "/") {
                     temp = double.Parse(tempList[i - 1]) / double.Parse(tempList[i + 1]);
+                    tempList[i - 1] = temp.ToString();
+                    tempList.RemoveAt(i);
+                    tempList.RemoveAt(i);
                 }
             }
-            return output;
+
+            for (int i = 0; i < tempList.Count; i++)
+            {
+                if (tempList[i] == "+")
+                {
+                    temp = double.Parse(tempList[i - 1]) + double.Parse(tempList[i + 1]);
+                    tempList[i - 1] = temp.ToString();
+                    tempList.RemoveAt(i);
+                    tempList.RemoveAt(i);
+                }
+                else if (tempList[i] == "-")
+                {
+                    temp = double.Parse(tempList[i - 1]) - double.Parse(tempList[i + 1]);
+                    tempList[i - 1] = temp.ToString();
+                    tempList.RemoveAt(i);
+                    tempList.RemoveAt(i);
+                }
+            }
+
+            return tempList[0];
+        }
+
+        private void decClick(object sender, EventArgs e)
+        {
+
         }
     }
 }
