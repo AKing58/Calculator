@@ -272,7 +272,7 @@
             this.btnEquals.TabIndex = 21;
             this.btnEquals.Text = " = ";
             this.btnEquals.UseVisualStyleBackColor = true;
-            this.btnEquals.Click += new System.EventHandler(this.numClick);
+            this.btnEquals.Click += new System.EventHandler(this.equalsClick);
             // 
             // btnOn
             // 

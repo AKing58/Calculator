@@ -28,5 +28,23 @@ namespace Calculator
             inputTxt.Text += thisBtn.Text;
         }
 
+        private void equalsClick(object sender, EventArgs e)
+        {
+            String[] splitInput = inputTxt.Text.Split(' ');
+            inputTxt.Text += " = " + bedmas(splitInput);
+        }
+
+        private double bedmas(String[] input)
+        {
+            /*
+            double output = 0;
+            String[] temp = ;
+            for(int i = 0; i<input.Length; i++)
+            {
+                if()
+            }
+            return output;
+            */
+        }
     }
 }
