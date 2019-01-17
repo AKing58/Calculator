@@ -36,15 +36,19 @@ namespace Calculator
 
         private double bedmas(String[] input)
         {
-            /*
             double output = 0;
-            String[] temp = ;
-            for(int i = 0; i<input.Length; i++)
+            List<String> tempList = input.ToList();
+            double temp = 0;
+            for(int i = 0; i<tempList.Count; i++)
             {
-                if()
+                if(tempList[i] == "X") {
+                    temp = double.Parse(tempList[i - 1]) * double.Parse(tempList[i+1]);
+                }
+                else if(tempList[i] == "/") {
+                    temp = double.Parse(tempList[i - 1]) / double.Parse(tempList[i + 1]);
+                }
             }
             return output;
-            */
         }
     }
 }
