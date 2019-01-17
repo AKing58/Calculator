@@ -55,9 +55,9 @@
             this.btnRightPar = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.button10 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -171,12 +171,15 @@
             this.btnClr.TabIndex = 10;
             this.btnClr.Text = "C";
             this.btnClr.UseVisualStyleBackColor = true;
+            this.btnClr.Click += new System.EventHandler(this.clearInput);
             // 
             // inputTxt
             // 
+            this.inputTxt.Enabled = false;
             this.inputTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.inputTxt.Location = new System.Drawing.Point(10, 11);
             this.inputTxt.Name = "inputTxt";
+            this.inputTxt.ReadOnly = true;
             this.inputTxt.Size = new System.Drawing.Size(285, 35);
             this.inputTxt.TabIndex = 11;
             this.inputTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -198,7 +201,7 @@
             this.btnPlus.TabIndex = 13;
             this.btnPlus.Text = " + ";
             this.btnPlus.UseVisualStyleBackColor = true;
-            this.btnPlus.Click += new System.EventHandler(this.numClick);
+            this.btnPlus.Click += new System.EventHandler(this.opClick);
             // 
             // btnMinus
             // 
@@ -342,6 +345,25 @@
             this.panel2.Size = new System.Drawing.Size(134, 174);
             this.panel2.TabIndex = 26;
             // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(8, 131);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(35, 35);
+            this.button11.TabIndex = 28;
+            this.button11.Text = ".";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.decClick);
+            // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(89, 131);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(35, 35);
+            this.button10.TabIndex = 10;
+            this.button10.Text = "-+";
+            this.button10.UseVisualStyleBackColor = true;
+            // 
             // panel3
             // 
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -354,25 +376,6 @@
             this.panel3.Size = new System.Drawing.Size(176, 54);
             this.panel3.TabIndex = 27;
             // 
-            // button10
-            // 
-            this.button10.Location = new System.Drawing.Point(89, 131);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(35, 35);
-            this.button10.TabIndex = 10;
-            this.button10.Text = "-+";
-            this.button10.UseVisualStyleBackColor = true;
-            // 
-            // button11
-            // 
-            this.button11.Location = new System.Drawing.Point(8, 131);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(35, 35);
-            this.button11.TabIndex = 28;
-            this.button11.Text = ".";
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.decClick);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -383,6 +386,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnOn);
             this.Controls.Add(this.inputTxt);
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";
