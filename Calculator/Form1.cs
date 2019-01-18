@@ -13,6 +13,9 @@ namespace Calculator
 {
     public partial class Form1 : Form
     {
+        List<String> inputs;
+        double currNum;
+
         public Form1()
         {
             InitializeComponent();
