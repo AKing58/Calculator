@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -28,10 +29,30 @@ namespace Calculator
             inputTxt.Text += thisBtn.Text;
         }
 
+        private void opClick(object sender, EventArgs e)
+        {
+            String[] curInput = inputTxt.Text.Split(' ');
+            Button thisBtn = (Button)sender;
+            Debug.Write(curInput.Length);
+            if(curInput[curInput.Length-1] == "+" ||
+                curInput[curInput.Length-1] == "-" ||
+                curInput[curInput.Length-1] == "x" ||
+                curInput[curInput.Length-1] == "/")
+            {
+                curInput[curInput.Length-1] = thisBtn.Text.Trim();
+                inputTxt.Text = String.Join(" ", curInput);
+                inputTxt.Text += " ";
+            }
+            else
+            {
+                inputTxt.Text += thisBtn.Text;
+            }
+        }
+
         private void equalsClick(object sender, EventArgs e)
         {
             String[] splitInput = inputTxt.Text.Split(' ');
-            inputTxt.Text += " = " + bedmas(splitInput);
+            inputTxt.Text = bedmas(splitInput);
         }
 
         private string bedmas(String[] input)
@@ -39,10 +60,11 @@ namespace Calculator
             double output = 0;
             List<String> tempList = input.ToList();
             double temp = 0;
-            for(int i = 0; i<tempList.Count; i++)
+            int i;
+            for(i = 0; i < tempList.Count; i++)
             {
-                if(tempList[i] == "X") {
-                    temp = double.Parse(tempList[i - 1]) * double.Parse(tempList[i+1]);
+                if(tempList[i] == "x") {
+                    temp = double.Parse(tempList[i - 1]) * double.Parse(tempList[i + 1]);
                     tempList[i - 1] = temp.ToString();
                     tempList.RemoveAt(i);
                     tempList.RemoveAt(i);
@@ -55,7 +77,7 @@ namespace Calculator
                 }
             }
 
-            for (int i = 0; i < tempList.Count; i++)
+            for (i = 0; i < tempList.Count; i++)
             {
                 if (tempList[i] == "+")
                 {
@@ -80,5 +102,12 @@ namespace Calculator
         {
 
         }
+
+        private void clearInput(object sender, EventArgs e)
+        {
+            inputTxt.Text = "";
+        }
+
+        
     }
 }

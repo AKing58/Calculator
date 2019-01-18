@@ -184,9 +184,11 @@
             this.btnClr.TabIndex = 10;
             this.btnClr.Text = "C";
             this.btnClr.UseVisualStyleBackColor = true;
+            this.btnClr.Click += new System.EventHandler(this.clearInput);
             // 
             // inputTxt
             // 
+            this.inputTxt.Enabled = false;
             this.inputTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.inputTxt.Location = new System.Drawing.Point(20, 21);
             this.inputTxt.Margin = new System.Windows.Forms.Padding(6);
@@ -214,7 +216,7 @@
             this.btnPlus.TabIndex = 13;
             this.btnPlus.Text = " + ";
             this.btnPlus.UseVisualStyleBackColor = true;
-            this.btnPlus.Click += new System.EventHandler(this.numClick);
+            this.btnPlus.Click += new System.EventHandler(this.opClick);
             // 
             // btnMinus
             // 
@@ -427,6 +429,7 @@
             this.Controls.Add(this.btnOn);
             this.Controls.Add(this.inputTxt);
             this.Margin = new System.Windows.Forms.Padding(6);
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";
