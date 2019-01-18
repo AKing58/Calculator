@@ -14,7 +14,7 @@ namespace Calculator
     public partial class Form1 : Form
     {
         List<String> inputs;
-        double currNum;
+        String curNum;
 
         public Form1()
         {
@@ -29,26 +29,19 @@ namespace Calculator
         private void numClick(object sender, EventArgs e)
         {
             Button thisBtn = (Button) sender;
-            inputTxt.Text += thisBtn.Text;
+            curNum += thisBtn.Text;
         }
 
         private void opClick(object sender, EventArgs e)
         {
-            String[] curInput = inputTxt.Text.Split(' ');
             Button thisBtn = (Button)sender;
-            Debug.Write(curInput.Length);
-            if(curInput[curInput.Length-1] == "+" ||
-                curInput[curInput.Length-1] == "-" ||
-                curInput[curInput.Length-1] == "x" ||
-                curInput[curInput.Length-1] == "/")
+            
+            if(inputs[inputs.Count-1] == "+" ||
+                inputs[inputs.Count - 1] == "-" ||
+                inputs[inputs.Count - 1] == "x" ||
+                inputs[inputs.Count - 1] == "/")
             {
-                curInput[curInput.Length-1] = thisBtn.Text.Trim();
-                inputTxt.Text = String.Join(" ", curInput);
-                inputTxt.Text += " ";
-            }
-            else
-            {
-                inputTxt.Text += thisBtn.Text;
+                inputs[input]
             }
         }
 
