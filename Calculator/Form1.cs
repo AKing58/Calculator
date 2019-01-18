@@ -32,6 +32,7 @@ namespace Calculator
             curNum += thisBtn.Text;
         }
 
+        
         private void opClick(object sender, EventArgs e)
         {
             Button thisBtn = (Button)sender;
@@ -44,6 +45,7 @@ namespace Calculator
                 inputs[input]
             }
         }
+        
 
         private void equalsClick(object sender, EventArgs e)
         {
@@ -104,6 +106,15 @@ namespace Calculator
             inputTxt.Text = "";
         }
 
-        
+        private void keyPress(object sender, KeyEventArgs e)
+        {
+           if (e.KeyCode >= Keys.D0 && e.KeyCode <= Keys.D9)
+            {
+                Debug.Write((int)(e.KeyCode - 48));
+            } else
+            {
+                Debug.Write(e.KeyCode);
+            }
+        }
     }
 }
