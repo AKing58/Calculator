@@ -47,6 +47,7 @@ namespace Calculator
             printDisplay(inputs);
         }
 
+        
         private void opClick(object sender, EventArgs e)
         {
             Button thisBtn = (Button)sender;
@@ -76,6 +77,7 @@ namespace Calculator
            
             printDisplay(inputs);
         }
+        
 
         private void equalsClick(object sender, EventArgs e)
         {
@@ -85,7 +87,6 @@ namespace Calculator
 
         private double bedmas(List<String> input)
         {
-            double output = 0;
             double temp = 0;
             int i;
             inputs.Add(curNum);
@@ -140,6 +141,15 @@ namespace Calculator
             
         }
 
-        
+        private void keyPress(object sender, KeyEventArgs e)
+        {
+           if (e.KeyCode >= Keys.D0 && e.KeyCode <= Keys.D9)
+            {
+                Debug.Write((int)(e.KeyCode - 48));
+            } else
+            {
+                Debug.Write(e.KeyCode);
+            }
+        }
     }
 }
