@@ -31,13 +31,14 @@ namespace Calculator
 
         private void printDisplay(List<String> input)
         {
-            inputTxt.Text = "";
+            inputTxt.Text = "\"";
             for (int i = 0; i < input.Count; i++)
             {
                 inputTxt.Text += input[i];
-                inputTxt.Text += " ";
+                inputTxt.Text += " |";
             }
             inputTxt.Text += curNum;
+            inputTxt.Text += "\"";
         }
 
         private void numClick(object sender, EventArgs e)
@@ -90,7 +91,7 @@ namespace Calculator
             double temp = 0;
             int i;
             inputs.Add(curNum);
-            for(i = 1; i < inputs.Count; i++)
+            for(i = 0; i < inputs.Count; i++)
             {
                 if(inputs[i] == "x") {
                     temp = double.Parse(inputs[i - 1]) * double.Parse(inputs[i + 1]);
@@ -106,7 +107,7 @@ namespace Calculator
                 }
             }
 
-            for (i = 1; i < inputs.Count; i++)
+            for (i = 0; i < inputs.Count; i++)
             {
                 if (inputs[i] == "+")
                 {
@@ -130,7 +131,7 @@ namespace Calculator
 
         private void decClick(object sender, EventArgs e)
         {
-
+            printDisplay(inputs);
         }
 
         private void clearInput(object sender, EventArgs e)
@@ -150,6 +151,15 @@ namespace Calculator
             {
                 Debug.Write(e.KeyCode);
             }
+        }
+
+        private void posNegClick(object sender, EventArgs e)
+        {
+            inputTxt.Text = "\"";
+            inputTxt.Text += inputs[0];
+            inputTxt.Text += inputs[1];
+            inputTxt.Text += inputs.Count;
+            inputTxt.Text += "\"";
         }
     }
 }
