@@ -159,23 +159,10 @@ namespace Calculator
                 tempList.RemoveAt(startLoc);
                 bracketCount--;
             }
-            foreach(var value in tempList)
-            {
-                Debug.Write(value);
-                Debug.Write("|");
-            }
-            Debug.WriteLine("");
             for (i = startLoc; i < tempList.Count; i++)
             {
                 if(tempList[i] == ")") { break; }
                 if (tempList[i] == "x") {
-                    foreach (var value in tempList)
-                    {
-                        Debug.Write(value);
-                    }
-                    Debug.WriteLine("");
-                    Debug.WriteLine("i: " + i);
-                    Debug.WriteLine(tempList[i-1] + " : " + tempList[i+1]);
                     temp = double.Parse(tempList[i - 1]) * double.Parse(tempList[i + 1]);
                     tempList[i - 1] = temp.ToString();
                     tempList.RemoveAt(i);
@@ -189,8 +176,6 @@ namespace Calculator
                     tempList.RemoveAt(i);
                     i -= 2;
                 }
-
-                Debug.WriteLine("Yo: " + tempList.Count);
             }
 
             for (i = startLoc; i < tempList.Count; i++)
@@ -212,26 +197,14 @@ namespace Calculator
                     tempList.RemoveAt(i);
                     i -= 2;
                 }
-                Debug.WriteLine("No: " + tempList.Count);
             }
-
-
-            Debug.WriteLine("bracket" + bracketCount);
+            
             if (bracketCount != 0 && tempList[i] == ")")
             {
-                Debug.WriteLine("Templist[i]: " + tempList[i]);
                 tempList.RemoveAt(i);
                 bracketCount++;
             }
-
-            Debug.WriteLine("------------");
-            foreach (var value in tempList)
-            {
-                Debug.Write(value);
-            }
-            Debug.WriteLine("");
-            Debug.WriteLine("i: " + i);
-            Debug.WriteLine("------------");
+            
             return double.Parse(tempList[startLoc]);
         }
 
@@ -384,6 +357,20 @@ namespace Calculator
         private void mrClick(object sender, EventArgs e)
         {
 
+        }
+
+        private void CEClick(object sender, EventArgs e)
+        {
+            if(curNum != "")
+            {
+                curNum = "";
+            }
+            else
+            {
+                if(inputs.Count > 0)
+                    inputs.RemoveAt(inputs.Count - 1);
+            }
+            printDisplay(inputs);
         }
     }
 }
