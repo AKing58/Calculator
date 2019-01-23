@@ -165,13 +165,53 @@ namespace Calculator
 
         private void keyPress(object sender, KeyEventArgs e)
         {
-           if (e.KeyCode >= Keys.D0 && e.KeyCode <= Keys.D9)
+           switch (e.KeyCode)
             {
-                Debug.Write((int)(e.KeyCode - 48));
-            } else
-            {
-                Debug.Write(e.KeyCode);
+                case Keys.D0: case Keys.D1: case Keys.D2:
+                case Keys.D3: case Keys.D4: case Keys.D5:
+                case Keys.D6: case Keys.D7: case Keys.D8:
+                case Keys.D9:
+                    {
+                        if (e.KeyCode == Keys.D8 && e.Shift)
+                        {
+                            Debug.Write("*");
+                            break;
+                        }
+                        else
+                        {
+                            Debug.Write((int)(e.KeyCode - 48));
+                            break;
+                        }
+                    }
+                case Keys.Oemplus: 
+                    {
+                        if (e.KeyCode == Keys.Oemplus && e.Shift)
+                        {
+                            Debug.Write("+");
+                            break;
+                        } else
+                        {
+                            Debug.Write("=");
+                            break;
+                        }
+                    }
+                case Keys.OemMinus:
+                    {
+                        Debug.Write("-");
+                        break;
+                    }
+                case Keys.OemQuestion:
+                    {
+                        Debug.Write("/");
+                        break;
+                    }
+                case Keys.Back:
+                    {
+                        Debug.Write("Backspace");
+                        break;
+                    }
             }
+
         }
 
         private void posNegClick(object sender, EventArgs e)
