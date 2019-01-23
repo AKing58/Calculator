@@ -360,6 +360,7 @@ namespace Calculator
             }
             inputs.Add(")");
             printDisplay(inputs);
+        }
         // Clears the memory, setting it to blank
         private void mcClick(object sender, EventArgs e)
         {
