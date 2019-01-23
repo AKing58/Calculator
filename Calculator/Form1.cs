@@ -11,6 +11,15 @@ using System.Windows.Forms;
 
 namespace Calculator
 {
+    /// <summary>
+    /// Purpose: Runs the application
+    /// Input: Numbers and Operations
+    /// Output: Numbers
+    /// Author: Adam King, Justin Kwok
+    /// Date: 23/01/2019
+    /// Updated By: Adam King, Justin Kwok
+    /// Date: 23/01/2019
+    /// </summary>
     public partial class Form1 : Form
     {
         static List<string> inputs= new List<string> { "" };
@@ -20,6 +29,7 @@ namespace Calculator
         double total;
         bool on = false;
         int bracketCount = 0;
+        String memCalc = "";
 
         public Form1()
         {
@@ -32,6 +42,7 @@ namespace Calculator
             tempList.Clear();
         }
 
+        // Turns "on" the calculator
         private void onButton(object sender, EventArgs e)
         {
             on = true;
@@ -39,6 +50,7 @@ namespace Calculator
         }
 
         private void printDisplay(List<string> inputList)
+        // Print function that copies the list to a single string
         {
             inputTxt.Text = "";
             for (int i = 0; i < inputList.Count; i++)
@@ -48,6 +60,7 @@ namespace Calculator
             inputTxt.Text += curNum;
         }
 
+        // Adds numbers to the display
         private void numClick(object sender, EventArgs e)
         {
             if (!on) { return; }
@@ -56,7 +69,7 @@ namespace Calculator
             printDisplay(inputs);
         }
 
-        
+        // Adds operations to the display
         private void opClick(object sender, EventArgs e)
         {
             if (!on) { return; }
@@ -93,7 +106,7 @@ namespace Calculator
             printDisplay(inputs);
         }
         
-
+        // Calls the BEDMAS function and prints to display
         private void equalsClick(object sender, EventArgs e)
         {
             if (!on) { return; }
@@ -137,6 +150,7 @@ namespace Calculator
             printDisplay(inputs);
         }
 
+        // Performs order of operations on the list of strings
         private double bedmas(int startLoc, List<string> inList)
         {
             double temp = 0;
@@ -221,11 +235,13 @@ namespace Calculator
             return double.Parse(tempList[startLoc]);
         }
 
+        // Adds a decimal to the display
         private void decClick(object sender, EventArgs e)
         {
 
         }
 
+        // Clears the display
         private void clearInput(object sender, EventArgs e)
         {
             if (!on) { return; }
@@ -235,15 +251,63 @@ namespace Calculator
             tempList.Clear();
         }
 
+        // Enables keyboard input for application
         private void keyPress(object sender, KeyEventArgs e)
         {
-           if (e.KeyCode >= Keys.D0 && e.KeyCode <= Keys.D9)
+           if (!on) { return; }
+           switch (e.KeyCode)
             {
-                Debug.Write((int)(e.KeyCode - 48));
-            } else
-            {
-                Debug.Write(e.KeyCode);
+                case Keys.D0: case Keys.D1: case Keys.D2:
+                case Keys.D3: case Keys.D4: case Keys.D5:
+                case Keys.D6: case Keys.D7: case Keys.D8:
+                case Keys.D9:
+                    {
+                        if (e.KeyCode == Keys.D8 && e.Shift)
+                        {
+                            Debug.Write("*");
+                            break;
+                        }
+                        else
+                        {
+                            Debug.Write((int)(e.KeyCode - 48));
+                            break;
+                        }
+                    }
+                case Keys.Oemplus: 
+                    {
+                        if (e.KeyCode == Keys.Oemplus && e.Shift)
+                        {
+                            Debug.Write("+");
+                            break;
+                        } else
+                        {
+                            Debug.Write("=");
+                            break;
+                        }
+                    }
+                case Keys.OemMinus:
+                    {
+                        Debug.Write("-");
+                        break;
+                    }
+                case Keys.OemQuestion:
+                    {
+                        Debug.Write("/");
+                        break;
+                    }
+                case Keys.Back:
+                    {
+                        Debug.Write("Backspace");
+                        break;
+                    }
+                case Keys.Delete:
+                    {
+                        Debug.Write("Delete");
+                        break;
+                    }
+                    
             }
+
         }
 
         private void posNegClick(object sender, EventArgs e)
@@ -296,6 +360,29 @@ namespace Calculator
             }
             inputs.Add(")");
             printDisplay(inputs);
+        // Clears the memory, setting it to blank
+        private void mcClick(object sender, EventArgs e)
+        {
+            if (!on) { return; }
+            memCalc = "";
+        }
+
+        // Stores the current display to memory
+        private void msClick(object sender, EventArgs e)
+        {
+            if (!on) { return; }
+        }
+
+        // Adds the current calculation to memory
+        private void mplusClick(object sender, EventArgs e)
+        {
+
+        }
+
+        // Returns calculation from memory
+        private void mrClick(object sender, EventArgs e)
+        {
+
         }
     }
 }
