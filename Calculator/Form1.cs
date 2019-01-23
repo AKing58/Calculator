@@ -220,6 +220,12 @@ namespace Calculator
                         Debug.Write("Backspace");
                         break;
                     }
+                case Keys.Delete:
+                    {
+                        Debug.Write("Delete");
+                        break;
+                    }
+                    
             }
 
         }
