@@ -18,6 +18,7 @@ namespace Calculator
         String curNum = "";
         double total;
         bool on = false;
+        String memCalc = "";
 
         public Form1()
         {
@@ -175,6 +176,7 @@ namespace Calculator
 
         private void keyPress(object sender, KeyEventArgs e)
         {
+           if (!on) { return; }
            switch (e.KeyCode)
             {
                 case Keys.D0: case Keys.D1: case Keys.D2:
@@ -231,6 +233,27 @@ namespace Calculator
         }
 
         private void posNegClick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void mcClick(object sender, EventArgs e)
+        {
+            if (!on) { return; }
+            memCalc = "";
+        }
+
+        private void msClick(object sender, EventArgs e)
+        {
+            if (!on) { return; }
+        }
+
+        private void mplusClick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void mrClick(object sender, EventArgs e)
         {
 
         }
