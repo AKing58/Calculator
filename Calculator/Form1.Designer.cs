@@ -324,7 +324,7 @@
             this.btnLeftPar.TabIndex = 23;
             this.btnLeftPar.Text = "(";
             this.btnLeftPar.UseVisualStyleBackColor = true;
-            this.btnLeftPar.Click += new System.EventHandler(this.numClick);
+            this.btnLeftPar.Click += new System.EventHandler(this.addLeftBracket);
             // 
             // btnRightPar
             // 
@@ -335,7 +335,7 @@
             this.btnRightPar.TabIndex = 24;
             this.btnRightPar.Text = ")";
             this.btnRightPar.UseVisualStyleBackColor = true;
-            this.btnRightPar.Click += new System.EventHandler(this.numClick);
+            this.btnRightPar.Click += new System.EventHandler(this.addRightBracket);
             // 
             // panel1
             // 
