@@ -11,6 +11,15 @@ using System.Windows.Forms;
 
 namespace Calculator
 {
+    /// <summary>
+    /// Purpose: Runs the application
+    /// Input: Numbers and Operations
+    /// Output: Numbers
+    /// Author: Adam King, Justin Kwok
+    /// Date: 23/01/2019
+    /// Updated By: Adam King, Justin Kwok
+    /// Date: 23/01/2019
+    /// </summary>
     public partial class Form1 : Form
     {
         static List<string> inputs= new List<string> { "" };
@@ -30,12 +39,14 @@ namespace Calculator
             inputs.Clear();
         }
 
+        // Turns "on" the calculator
         private void onButton(object sender, EventArgs e)
         {
             on = true;
             inputTxt.Text = "0";
         }
 
+        // Print function that copies the list to a single string
         private void printDisplay(List<String> input)
         {
             inputTxt.Text = "";
@@ -46,6 +57,7 @@ namespace Calculator
             inputTxt.Text += curNum;
         }
 
+        // Adds numbers to the display
         private void numClick(object sender, EventArgs e)
         {
             if (!on) { return; }
@@ -54,7 +66,7 @@ namespace Calculator
             printDisplay(inputs);
         }
 
-        
+        // Adds operations to the display
         private void opClick(object sender, EventArgs e)
         {
             if (!on) { return; }
@@ -89,7 +101,7 @@ namespace Calculator
             printDisplay(inputs);
         }
         
-
+        // Calls the BEDMAS function and prints to display
         private void equalsClick(object sender, EventArgs e)
         {
             if (!on) { return; }
@@ -115,6 +127,7 @@ namespace Calculator
             printDisplay(inputs);
         }
 
+        // Performs order of operations on the list of strings
         private double bedmas(List<String> input)
         {
             double temp = 0;
@@ -160,11 +173,13 @@ namespace Calculator
             return double.Parse(inputs[0]);
         }
 
+        // Adds a decimal to the display
         private void decClick(object sender, EventArgs e)
         {
             inputTxt.Text = (inputs.Count).ToString();
         }
 
+        // Clears the display
         private void clearInput(object sender, EventArgs e)
         {
             if (!on) { return; }
@@ -174,6 +189,7 @@ namespace Calculator
             
         }
 
+        // Enables keyboard input for application
         private void keyPress(object sender, KeyEventArgs e)
         {
            if (!on) { return; }
@@ -237,22 +253,26 @@ namespace Calculator
 
         }
 
+        // Clears the memory, setting it to blank
         private void mcClick(object sender, EventArgs e)
         {
             if (!on) { return; }
             memCalc = "";
         }
 
+        // Stores the current display to memory
         private void msClick(object sender, EventArgs e)
         {
             if (!on) { return; }
         }
 
+        // Adds the current calculation to memory
         private void mplusClick(object sender, EventArgs e)
         {
 
         }
 
+        // Returns calculation from memory
         private void mrClick(object sender, EventArgs e)
         {
 
