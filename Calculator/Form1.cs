@@ -31,11 +31,6 @@ namespace Calculator
 
         private void printDisplay(List<String> input)
         {
-            foreach(var strinput in inputs)
-            {
-                Debug.WriteLine(strinput);
-            }
-            Debug.Flush();
             inputTxt.Text = "";
             for (int i = 0; i < input.Count; i++)
             {
@@ -77,6 +72,10 @@ namespace Calculator
                     inputs.Add(thisBtn.Text);
                 }
             }
+            else
+            {
+                return;
+            }
 
             printDisplay(inputs);
         }
@@ -88,22 +87,22 @@ namespace Calculator
             {
                 inputs.Add("0");
             }
-            else if(inputs[inputs.Count-1] == "+" ||
+            else if(curNum == "")
+            {
+                if (inputs[inputs.Count - 1] == "+" ||
                 inputs[inputs.Count - 1] == "-" ||
                 inputs[inputs.Count - 1] == "x" ||
                 inputs[inputs.Count - 1] == "/")
-            {
-                inputs.RemoveAt(inputs.Count - 1);
+                    inputs.RemoveAt(inputs.Count - 1);
             }else
             {
                 inputs.Add(curNum);
+                curNum = "";
             }
             
             total = bedmas(inputs);
             
             printDisplay(inputs);
-
-            curNum = inputs[0];
         }
 
         private double bedmas(List<String> input)
@@ -177,11 +176,7 @@ namespace Calculator
 
         private void posNegClick(object sender, EventArgs e)
         {
-            inputTxt.Text = "\"";
-            inputTxt.Text += inputs[0];
-            inputTxt.Text += inputs[1];
-            inputTxt.Text += inputs.Count;
-            inputTxt.Text += "\"";
+
         }
     }
 }
