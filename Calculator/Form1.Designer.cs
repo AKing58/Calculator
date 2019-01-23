@@ -313,6 +313,7 @@
             this.btnOn.TabIndex = 22;
             this.btnOn.Text = "ON";
             this.btnOn.UseVisualStyleBackColor = true;
+            this.btnOn.Click += new System.EventHandler(this.onButton);
             // 
             // btnLeftPar
             // 

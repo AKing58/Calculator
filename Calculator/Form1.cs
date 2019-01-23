@@ -17,6 +17,7 @@ namespace Calculator
         
         String curNum = "";
         double total;
+        bool on = false;
 
         public Form1()
         {
@@ -25,8 +26,13 @@ namespace Calculator
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            inputTxt.Text = "0";
             inputs.Clear();
+        }
+
+        private void onButton(object sender, EventArgs e)
+        {
+            on = true;
+            inputTxt.Text = "0";
         }
 
         private void printDisplay(List<String> input)
@@ -41,6 +47,7 @@ namespace Calculator
 
         private void numClick(object sender, EventArgs e)
         {
+            if (!on) { return; }
             Button thisBtn = (Button) sender;
             curNum += thisBtn.Text;
             printDisplay(inputs);
@@ -49,6 +56,7 @@ namespace Calculator
         
         private void opClick(object sender, EventArgs e)
         {
+            if (!on) { return; }
             Button thisBtn = (Button)sender;
             Debug.WriteLine(curNum);
             if (curNum != "" && inputs.Count == 0)
@@ -83,7 +91,8 @@ namespace Calculator
 
         private void equalsClick(object sender, EventArgs e)
         {
-            if(curNum == "" && inputs.Count == 0)
+            if (!on) { return; }
+            if (curNum == "" && inputs.Count == 0)
             {
                 inputs.Add("0");
             }
@@ -157,6 +166,7 @@ namespace Calculator
 
         private void clearInput(object sender, EventArgs e)
         {
+            if (!on) { return; }
             inputTxt.Text = "0";
             curNum = "";
             inputs.Clear();
