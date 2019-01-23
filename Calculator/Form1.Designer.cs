@@ -229,7 +229,7 @@
             this.btnMinus.TabIndex = 14;
             this.btnMinus.Text = "-";
             this.btnMinus.UseVisualStyleBackColor = true;
-            this.btnMinus.Click += new System.EventHandler(this.numClick);
+            this.btnMinus.Click += new System.EventHandler(this.opClick);
             // 
             // btnMult
             // 
@@ -240,7 +240,7 @@
             this.btnMult.TabIndex = 15;
             this.btnMult.Text = "x";
             this.btnMult.UseVisualStyleBackColor = true;
-            this.btnMult.Click += new System.EventHandler(this.numClick);
+            this.btnMult.Click += new System.EventHandler(this.opClick);
             // 
             // btnDiv
             // 
@@ -251,7 +251,7 @@
             this.btnDiv.TabIndex = 16;
             this.btnDiv.Text = "/";
             this.btnDiv.UseVisualStyleBackColor = true;
-            this.btnDiv.Click += new System.EventHandler(this.numClick);
+            this.btnDiv.Click += new System.EventHandler(this.opClick);
             // 
             // btnMemClr
             // 

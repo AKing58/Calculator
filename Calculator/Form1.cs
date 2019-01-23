@@ -13,9 +13,9 @@ namespace Calculator
 {
     public partial class Form1 : Form
     {
-        static List<string> inputs= new List<string> { " " };
+        static List<string> inputs= new List<string> { "" };
         
-        String curNum;
+        String curNum = "";
         double total;
 
         public Form1()
@@ -31,14 +31,17 @@ namespace Calculator
 
         private void printDisplay(List<String> input)
         {
-            inputTxt.Text = "\"";
+            foreach(var strinput in inputs)
+            {
+                Debug.WriteLine(strinput);
+            }
+            Debug.Flush();
+            inputTxt.Text = "";
             for (int i = 0; i < input.Count; i++)
             {
                 inputTxt.Text += input[i];
-                inputTxt.Text += " |";
             }
             inputTxt.Text += curNum;
-            inputTxt.Text += "\"";
         }
 
         private void numClick(object sender, EventArgs e)
@@ -52,45 +55,61 @@ namespace Calculator
         private void opClick(object sender, EventArgs e)
         {
             Button thisBtn = (Button)sender;
-            if (inputs.Count != 0)
+            Debug.WriteLine(curNum);
+            if (curNum != "" && inputs.Count == 0)
             {
-                if (inputs[inputs.Count - 1] == "+" ||
-               inputs[inputs.Count - 1] == "-" ||
-               inputs[inputs.Count - 1] == "x" ||
-               inputs[inputs.Count - 1] == "/")
+                    inputs.Add(curNum);
+                    curNum = "";
+                    inputs.Add(thisBtn.Text);
+            }else if(inputs.Count > 0)
+            {
+                if ((inputs[inputs.Count - 1] == "+" && curNum == "")||
+               (inputs[inputs.Count - 1] == "-" && curNum == "")||
+               (inputs[inputs.Count - 1] == "x" && curNum == "")||
+               (inputs[inputs.Count - 1] == "/" && curNum == ""))
                 {
                     inputs.RemoveAt(inputs.Count-1);
                     inputs.Add(thisBtn.Text);
-                }
-                else
+                }else
                 {
                     inputs.Add(curNum);
                     curNum = "";
                     inputs.Add(thisBtn.Text);
                 }
             }
-            else
-            {
-                inputs.Add(curNum);
-                inputs.Add(thisBtn.Text);
-                curNum = "";
-            }
-           
+
             printDisplay(inputs);
         }
         
 
         private void equalsClick(object sender, EventArgs e)
         {
-            curNum = "";
+            if(curNum == "" && inputs.Count == 0)
+            {
+                inputs.Add("0");
+            }
+            else if(inputs[inputs.Count-1] == "+" ||
+                inputs[inputs.Count - 1] == "-" ||
+                inputs[inputs.Count - 1] == "x" ||
+                inputs[inputs.Count - 1] == "/")
+            {
+                inputs.RemoveAt(inputs.Count - 1);
+            }else
+            {
+                inputs.Add(curNum);
+            }
+            
             total = bedmas(inputs);
+            
+            printDisplay(inputs);
+
+            curNum = inputs[0];
         }
 
         private double bedmas(List<String> input)
         {
             double temp = 0;
             int i;
-            inputs.Add(curNum);
             for(i = 0; i < inputs.Count; i++)
             {
                 if(inputs[i] == "x") {
@@ -98,12 +117,14 @@ namespace Calculator
                     inputs[i - 1] = temp.ToString();
                     inputs.RemoveAt(i);
                     inputs.RemoveAt(i);
+                    i -= 2;
                 }
                 else if(inputs[i] == "/") {
                     temp = double.Parse(inputs[i - 1]) / double.Parse(inputs[i + 1]);
                     inputs[i - 1] = temp.ToString();
                     inputs.RemoveAt(i);
                     inputs.RemoveAt(i);
+                    i -= 2;
                 }
             }
 
@@ -115,6 +136,7 @@ namespace Calculator
                     inputs[i - 1] = temp.ToString();
                     inputs.RemoveAt(i);
                     inputs.RemoveAt(i);
+                    i -= 2;
                 }
                 else if (inputs[i] == "-")
                 {
@@ -122,16 +144,16 @@ namespace Calculator
                     inputs[i - 1] = temp.ToString();
                     inputs.RemoveAt(i);
                     inputs.RemoveAt(i);
+                    i -= 2;
                 }
             }
-
-            //return double.Parse(inputs[0]);
-            return inputs.Count();
+            
+            return double.Parse(inputs[0]);
         }
 
         private void decClick(object sender, EventArgs e)
         {
-            printDisplay(inputs);
+            inputTxt.Text = (inputs.Count).ToString();
         }
 
         private void clearInput(object sender, EventArgs e)
