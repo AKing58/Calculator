@@ -53,6 +53,12 @@ namespace Calculator
         // Print function that copies the list to a single string
         private void printDisplay(List<string> inputList)
         {
+            if(inputList.Count==0 && curNum == "")
+            {
+                inputTxt.Text = "0";
+                return;
+            }
+                
             inputTxt.Text = "";
             if(curNum != "" && double.Parse(curNum)!=0)
                 curNum = curNum.TrimStart('0');
@@ -60,7 +66,9 @@ namespace Calculator
             {
                 inputTxt.Text += inputList[i];
             }
+            
             inputTxt.Text += curNum;
+            
         }
 
         // Adds numbers to the display on button click
@@ -75,6 +83,8 @@ namespace Calculator
         // Adds numbers to the display
         private void numDo(string numToAdd)
         {
+            if (inputs[inputs.Count - 1] == ")")
+                inputs.Add("x");
             curNum += numToAdd;
             printDisplay(inputs);
         }
@@ -338,7 +348,9 @@ namespace Calculator
         // Removes last digit when backspace used
         private void backspaceDo()
         {
-            curNum = curNum.Remove(curNum.Length - 1);
+            if(curNum!="")
+                curNum = curNum.Remove(curNum.Length - 1);
+            
             printDisplay(inputs);
         }
 
@@ -401,11 +413,20 @@ namespace Calculator
         // Adds left bracket to display
         private void addLBDo()
         {
+            
             bracketCount++;
             if (curNum != "")
             {
                 inputs.Add(curNum);
                 curNum = "";
+            }
+            if (inputs.Count > 0 &&
+                inputs[inputs.Count - 1] != "+" &&
+                inputs[inputs.Count - 1] != "-" &&
+                inputs[inputs.Count - 1] != "x" &&
+                inputs[inputs.Count - 1] != "/")
+            {
+                inputs.Add("x");
             }
             inputs.Add("(");
             printDisplay(inputs);
@@ -499,15 +520,13 @@ namespace Calculator
         private void CEDo()
         {
             if(inputs.Count == 0)
-            {
                 return;
-            }
             if (inputs[inputs.Count - 1] != "+" &&
                 inputs[inputs.Count - 1] != "-" &&
                 inputs[inputs.Count - 1] != "x" &&
                 inputs[inputs.Count - 1] != "/")
                 inputs.RemoveAt(inputs.Count - 1);
-            curNum = "0";
+            curNum = "";
             printDisplay(inputs);
         }
     }
