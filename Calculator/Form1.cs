@@ -80,6 +80,13 @@ namespace Calculator
         {
             if (inputs.Count > 0 && inputs[inputs.Count - 1] == ")")
                 inputs.Add("x");
+            if(inputs.Count == 1 &&
+                inputs[inputs.Count - 1] != "+" &&
+                inputs[inputs.Count - 1] != "-" &&
+                inputs[inputs.Count - 1] != "x" &&
+                inputs[inputs.Count - 1] != "/"){
+                inputs.Clear();
+            }
             curNum += numToAdd;
             printDisplay(inputs);
         }
