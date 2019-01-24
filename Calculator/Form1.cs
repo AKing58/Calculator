@@ -50,8 +50,8 @@ namespace Calculator
             
         }
 
-        private void printDisplay(List<string> inputList)
         // Print function that copies the list to a single string
+        private void printDisplay(List<string> inputList)
         {
             inputTxt.Text = "";
             if(curNum != "" && double.Parse(curNum)!=0)
@@ -63,7 +63,7 @@ namespace Calculator
             inputTxt.Text += curNum;
         }
 
-        // Adds numbers to the display
+        // Adds numbers to the display on button click
         private void numClick(object sender, EventArgs e)
         {
             if (!on) { return; }
@@ -72,13 +72,14 @@ namespace Calculator
             numDo(thisBtn.Text);
         }
 
+        // Adds numbers to the display
         private void numDo(string numToAdd)
         {
             curNum += numToAdd;
             printDisplay(inputs);
         }
 
-        // Adds operations to the display
+        // Calls the opDo function on button click
         private void opClick(object sender, EventArgs e)
         {
             if (!on) { return; }
@@ -86,6 +87,7 @@ namespace Calculator
             opDo(thisBtn.Text);
         }
 
+        // Adds operations to the display
         private void opDo(string opToAdd)
         {
             if (curNum != "" && inputs.Count == 0)
@@ -122,13 +124,14 @@ namespace Calculator
             printDisplay(inputs);
         }
 
-        // Calls the BEDMAS function and prints to display
+        // Clicking on the button calls the equalsDo function
         private void equalsClick(object sender, EventArgs e)
         {
             if (!on) { return; }
             equalsDo();
         }
 
+        // Calls the BEDMAS function and prints to display
         private void equalsDo()
         {
             if (curNum != "")
@@ -332,6 +335,7 @@ namespace Calculator
 
         }
 
+        // Removes last digit when backspace used
         private void backspaceDo()
         {
             curNum = curNum.Remove(curNum.Length - 1);
@@ -343,9 +347,8 @@ namespace Calculator
 
         }
 
-        /**
-         * Finds the position of the last left bracket
-         */
+        
+         // Finds the position of the last left bracket
         private int findBracketLoc(List<string> inputList)
         {
             for(int i = inputs.Count-1; i >= 0; i--)
@@ -356,6 +359,7 @@ namespace Calculator
             return -1;
         }
 
+        // Checks to see if list of strings has a bracket
         private bool hasBracket(List<string> inputList)
         {
             foreach (var bracket in inputList)
@@ -364,6 +368,7 @@ namespace Calculator
             return false;
         }
 
+        // Removes extra brackets from the string list
         private List<string> deleteExtraBrackets(List<string> inputList)
         {
             int lastLocation = 0;
@@ -386,12 +391,14 @@ namespace Calculator
             return inputList;
         }
 
-
+        // Adds left bracket on button click
         private void addLeftBracket(object sender, EventArgs e)
         {
             if (!on) { return; }
             addLBDo();
         }
+
+        // Adds left bracket to display
         private void addLBDo()
         {
             bracketCount++;
@@ -404,12 +411,14 @@ namespace Calculator
             printDisplay(inputs);
         }
 
+        // Adds right bracket on button click
         private void addRightBracket(object sender, EventArgs e)
         {
             if (!on) { return; }
             addRBDo();
         }
 
+        // Adds right bracket to display
         private void addRBDo()
         {
             if (!on) { return; }
@@ -424,6 +433,7 @@ namespace Calculator
             inputs.Add(")");
             printDisplay(inputs);
         }
+
         // Clears the memory, setting it to blank
         private void mcClick(object sender, EventArgs e)
         {
@@ -478,12 +488,14 @@ namespace Calculator
             printDisplay(inputs);
         }
 
+        // Clears last number on button click
         private void CEClick(object sender, EventArgs e)
         {
             if (!on) { return; }
             CEDo();
         }
 
+        // Clears last number that was input
         private void CEDo()
         {
             if(inputs.Count == 0)
