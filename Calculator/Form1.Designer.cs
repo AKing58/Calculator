@@ -55,11 +55,11 @@
             this.btnLeftPar = new System.Windows.Forms.Button();
             this.btnRightPar = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.backSpace = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.button10 = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.backSpace = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -385,6 +385,18 @@
             this.panel1.Size = new System.Drawing.Size(198, 267);
             this.panel1.TabIndex = 25;
             // 
+            // backSpace
+            // 
+            this.backSpace.BackgroundImage = global::Calculator.Properties.Resources.del;
+            this.backSpace.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.backSpace.Location = new System.Drawing.Point(134, 12);
+            this.backSpace.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.backSpace.Name = "backSpace";
+            this.backSpace.Size = new System.Drawing.Size(52, 54);
+            this.backSpace.TabIndex = 25;
+            this.backSpace.TabStop = false;
+            this.backSpace.UseVisualStyleBackColor = true;
+            // 
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -440,17 +452,6 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 28;
             this.pictureBox1.TabStop = false;
-            // 
-            // backSpace
-            // 
-            this.backSpace.Location = new System.Drawing.Point(134, 12);
-            this.backSpace.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.backSpace.Name = "backSpace";
-            this.backSpace.Size = new System.Drawing.Size(52, 54);
-            this.backSpace.TabIndex = 25;
-            this.backSpace.TabStop = false;
-            this.backSpace.Text = "DEL";
-            this.backSpace.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
