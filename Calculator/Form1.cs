@@ -82,6 +82,8 @@ namespace Calculator
 
         private void numDo(string numToAdd)
         {
+            if (inputs[inputs.Count - 1] == ")")
+                inputs.Add("x");
             curNum += numToAdd;
             printDisplay(inputs);
         }
@@ -404,11 +406,20 @@ namespace Calculator
         }
         private void addLBDo()
         {
+            
             bracketCount++;
             if (curNum != "")
             {
                 inputs.Add(curNum);
                 curNum = "";
+            }
+            if (inputs.Count > 0 &&
+                inputs[inputs.Count - 1] != "+" &&
+                inputs[inputs.Count - 1] != "-" &&
+                inputs[inputs.Count - 1] != "x" &&
+                inputs[inputs.Count - 1] != "/")
+            {
+                inputs.Add("x");
             }
             inputs.Add("(");
             printDisplay(inputs);
