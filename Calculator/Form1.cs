@@ -81,6 +81,7 @@ namespace Calculator
             if (inputs.Count > 0 && inputs[inputs.Count - 1] == ")")
                 inputs.Add("x");
             if(inputs.Count == 1 &&
+                inputs[inputs.Count - 1] != "(" &&
                 inputs[inputs.Count - 1] != "+" &&
                 inputs[inputs.Count - 1] != "-" &&
                 inputs[inputs.Count - 1] != "x" &&
@@ -176,8 +177,8 @@ namespace Calculator
             }
             for (int i = 0; i < tempList.Count; i++)
             {
-                if (tempList[tempList.Count - 1] == "0")
-                    tempList.RemoveAt(tempList.Count - 1);
+                if (tempList[i] == "0")
+                    tempList.RemoveAt(i);
             }
             bedmas(0, tempList);
             inputs = tempList;
