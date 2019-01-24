@@ -414,7 +414,7 @@ namespace Calculator
         // Adds left bracket to display
         private void addLBDo()
         {
-            
+
             bracketCount++;
             if (curNum != "")
             {
@@ -422,6 +422,7 @@ namespace Calculator
                 curNum = "";
             }
             if (inputs.Count > 0 &&
+                inputs[inputs.Count - 1] != "(" &&
                 inputs[inputs.Count - 1] != "+" &&
                 inputs[inputs.Count - 1] != "-" &&
                 inputs[inputs.Count - 1] != "x" &&
