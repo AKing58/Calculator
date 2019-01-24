@@ -44,14 +44,18 @@ namespace Calculator
         // Turns "on" the calculator
         private void onButton(object sender, EventArgs e)
         {
+            if(!on)
+                inputTxt.Text = "0";
             on = true;
-            inputTxt.Text = "0";
+            
         }
 
         private void printDisplay(List<string> inputList)
         // Print function that copies the list to a single string
         {
             inputTxt.Text = "";
+            if(curNum != "" && double.Parse(curNum)!=0)
+                curNum = curNum.TrimStart('0');
             for (int i = 0; i < inputList.Count; i++)
             {
                 inputTxt.Text += inputList[i];
@@ -122,14 +126,18 @@ namespace Calculator
         private void equalsClick(object sender, EventArgs e)
         {
             if (!on) { return; }
+            equalsDo();
+        }
 
+        private void equalsDo()
+        {
             if (curNum != "")
             {
                 inputs.Add(curNum);
                 curNum = "";
             }
             tempList = deleteExtraBrackets(inputs);
-            
+
             while (hasBracket(tempList))
             {
                 bedmas(findBracketLoc(tempList), tempList);
@@ -139,16 +147,17 @@ namespace Calculator
                 inputs.Add("0");
                 tempList.Add("0");
             }
-            else if(curNum == "")
+            else if (curNum == "")
             {
                 if (tempList[tempList.Count - 1] == "+" ||
                 tempList[tempList.Count - 1] == "-" ||
                 tempList[tempList.Count - 1] == "x" ||
-                tempList[tempList.Count - 1] == "/") {
+                tempList[tempList.Count - 1] == "/")
+                {
                     inputs.RemoveAt(inputs.Count - 1);
                     tempList.RemoveAt(tempList.Count - 1);
                 }
-                    
+
             }
             foreach (var things in tempList)
             {
@@ -158,7 +167,7 @@ namespace Calculator
 
             foreach (var things in inputs)
             {
-                Debug.Write(things+"/");
+                Debug.Write(things + "/");
             }
             Debug.WriteLine("|");
             bedmas(0, tempList);
@@ -258,11 +267,25 @@ namespace Calculator
                         if (e.KeyCode == Keys.D8 && e.Shift)
                         {
                             Debug.Write("*");
+                            opDo("x");
+                            break;
+                        }
+                        else if (e.KeyCode == Keys.D9 && e.Shift)
+                        {
+                            Debug.Write("(");
+                            addLeftBracket();
+                            break;
+                        }
+                        else if (e.KeyCode == Keys.D0 && e.Shift)
+                        {
+                            Debug.Write("(");
+                            addRightBracket();
                             break;
                         }
                         else
                         {
                             Debug.Write((int)(e.KeyCode - 48));
+                            numDo(((int)(e.KeyCode - 48)).ToString());
                             break;
                         }
                     }
@@ -271,36 +294,48 @@ namespace Calculator
                         if (e.KeyCode == Keys.Oemplus && e.Shift)
                         {
                             Debug.Write("+");
+                            opDo("+");
                             break;
                         } else
                         {
                             Debug.Write("=");
+                            equalsDo();
                             break;
                         }
                     }
                 case Keys.OemMinus:
                     {
                         Debug.Write("-");
+                        opDo("-");
                         break;
                     }
                 case Keys.OemQuestion:
                     {
                         Debug.Write("/");
+                        opDo("/");
                         break;
                     }
                 case Keys.Back:
                     {
                         Debug.Write("Backspace");
+                        backspaceDo();
                         break;
                     }
                 case Keys.Delete:
                     {
                         Debug.Write("Delete");
+                        CEDo();
                         break;
                     }
-                    
+
             }
 
+        }
+
+        private void backspaceDo()
+        {
+            curNum = curNum.Remove(curNum.Length - 1);
+            printDisplay(inputs);
         }
 
         private void posNegClick(object sender, EventArgs e)
@@ -351,9 +386,14 @@ namespace Calculator
             return inputList;
         }
 
+
         private void addLeftBracket(object sender, EventArgs e)
         {
             if (!on) { return; }
+            addLBDo();
+        }
+        private void addLBDo()
+        {
             bracketCount++;
             if (curNum != "")
             {
@@ -365,6 +405,12 @@ namespace Calculator
         }
 
         private void addRightBracket(object sender, EventArgs e)
+        {
+            if (!on) { return; }
+            addRBDo();
+        }
+
+        private void addRBDo()
         {
             if (!on) { return; }
             if (bracketCount <= 0)
@@ -435,15 +481,17 @@ namespace Calculator
         private void CEClick(object sender, EventArgs e)
         {
             if (!on) { return; }
-            if (curNum != "")
-            {
-                curNum = "";
-            }
-            else
-            {
-                if(inputs.Count > 0)
-                    inputs.RemoveAt(inputs.Count - 1);
-            }
+            CEDo();
+        }
+
+        private void CEDo()
+        {
+            if (inputs[inputs.Count - 1] != "+" &&
+                inputs[inputs.Count - 1] != "-" &&
+                inputs[inputs.Count - 1] != "x" &&
+                inputs[inputs.Count - 1] != "/")
+                inputs.RemoveAt(inputs.Count - 1);
+            curNum = "0";
             printDisplay(inputs);
         }
     }
