@@ -63,8 +63,14 @@ namespace Calculator
         private void numClick(object sender, EventArgs e)
         {
             if (!on) { return; }
-            Button thisBtn = (Button) sender;
-            curNum += thisBtn.Text;
+
+            Button thisBtn = (Button)sender;
+            numDo(thisBtn.Text);
+        }
+
+        private void numDo(string numToAdd)
+        {
+            curNum += numToAdd;
             printDisplay(inputs);
         }
 
@@ -73,28 +79,35 @@ namespace Calculator
         {
             if (!on) { return; }
             Button thisBtn = (Button)sender;
+            opDo(thisBtn.Text);
+        }
+
+        private void opDo(string opToAdd)
+        {
             if (curNum != "" && inputs.Count == 0)
             {
-                    inputs.Add(curNum);
-                    curNum = "";
-                    inputs.Add(thisBtn.Text);
-            }else if(inputs.Count > 0)
+                inputs.Add(curNum);
+                curNum = "";
+                inputs.Add(opToAdd);
+            }
+            else if (inputs.Count > 0)
             {
-                if ((inputs[inputs.Count - 1] == "+" && curNum == "")||
-               (inputs[inputs.Count - 1] == "-" && curNum == "")||
-               (inputs[inputs.Count - 1] == "x" && curNum == "")||
+                if ((inputs[inputs.Count - 1] == "+" && curNum == "") ||
+               (inputs[inputs.Count - 1] == "-" && curNum == "") ||
+               (inputs[inputs.Count - 1] == "x" && curNum == "") ||
                (inputs[inputs.Count - 1] == "/" && curNum == ""))
                 {
-                    inputs.RemoveAt(inputs.Count-1);
-                    inputs.Add(thisBtn.Text);
-                }else
+                    inputs.RemoveAt(inputs.Count - 1);
+                    inputs.Add(opToAdd);
+                }
+                else
                 {
-                    if(inputs[inputs.Count - 1] != ")")
+                    if (inputs[inputs.Count - 1] != ")")
                     {
                         inputs.Add(curNum);
                         curNum = "";
                     }
-                    inputs.Add(thisBtn.Text);
+                    inputs.Add(opToAdd);
                 }
             }
             else
@@ -104,7 +117,7 @@ namespace Calculator
 
             printDisplay(inputs);
         }
-        
+
         // Calls the BEDMAS function and prints to display
         private void equalsClick(object sender, EventArgs e)
         {
@@ -147,7 +160,7 @@ namespace Calculator
             {
                 Debug.Write(things);
             }
-            Debug.WriteLine("");
+            Debug.WriteLine("|");
             bedmas(0, tempList);
             inputs = tempList;
             printDisplay(inputs);
@@ -162,7 +175,7 @@ namespace Calculator
                 tempList.RemoveAt(startLoc);
                 bracketCount--;
             }
-            
+
             for (i = startLoc; i < tempList.Count; i++)
             {
                 if(tempList[i] == ")") { break; }
@@ -208,8 +221,10 @@ namespace Calculator
                 tempList.RemoveAt(i);
                 bracketCount++;
             }
-            
-            return double.Parse(tempList[startLoc]);
+            if (tempList.Count == 0)
+                return (double)0;
+            else
+                return double.Parse(tempList[startLoc]);
         }
 
         // Adds a decimal to the display
@@ -349,8 +364,14 @@ namespace Calculator
         private void msClick(object sender, EventArgs e)
         {
             if (!on) { return; }
-
-            memCalc = curNum;
+            if (curNum == "")
+            {
+                memCalc = inputs[inputs.Count - 1];
+            }
+            else
+            {
+                memCalc = curNum;
+            }
         }
 
         // Adds the current calculation to memory
@@ -359,7 +380,14 @@ namespace Calculator
             if (!on) { return; }
             
             double tempMem = double.Parse(memCalc);
-            tempMem = tempMem + double.Parse(curNum);
+            if (curNum == "")
+            {
+                tempMem = tempMem + double.Parse(inputs[inputs.Count - 1]);
+            }
+            else
+            {
+                tempMem = tempMem + double.Parse(curNum);
+            }
             memCalc = tempMem.ToString();
         }
 
@@ -367,7 +395,15 @@ namespace Calculator
         private void mrClick(object sender, EventArgs e)
         {
             if (!on) { return; }
-            curNum = memCalc;
+            if(inputs.Count > 0 && inputs[inputs.Count - 1].All(c => char.IsDigit(c))){
+                inputs.RemoveAt(inputs.Count - 1);
+                inputs.Add(memCalc);
+            }
+            else
+            {
+                curNum = memCalc;
+            }
+
             printDisplay(inputs);
         }
 
