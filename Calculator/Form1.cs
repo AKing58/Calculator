@@ -128,7 +128,7 @@ namespace Calculator
                 inputs.Add(curNum);
                 curNum = "";
             }
-            tempList = inputs;
+            tempList = deleteExtraBrackets(inputs);
             
             while (hasBracket(tempList))
             {
@@ -329,6 +329,28 @@ namespace Calculator
             return false;
         }
 
+        private List<string> deleteExtraBrackets(List<string> inputList)
+        {
+            int lastLocation = 0;
+            for (int i = inputList.Count - 1; i >= 0; i--)
+            {
+                if (inputList[i] == ")")
+                    lastLocation = i;
+            }
+
+            while (bracketCount > 0)
+            {
+                for(int i=lastLocation; i<inputList.Count; i++) {
+                    if(inputList[i] == "(")
+                    {
+                        inputList.RemoveAt(i);
+                    }
+                }
+                bracketCount--;
+            }
+            return inputList;
+        }
+
         private void addLeftBracket(object sender, EventArgs e)
         {
             if (!on) { return; }
@@ -345,6 +367,8 @@ namespace Calculator
         private void addRightBracket(object sender, EventArgs e)
         {
             if (!on) { return; }
+            if (bracketCount <= 0)
+                return;
             bracketCount--;
             if (curNum != "")
             {
