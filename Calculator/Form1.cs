@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Calculator
@@ -172,17 +167,6 @@ namespace Calculator
                 }
 
             }
-            foreach (var things in tempList)
-            {
-                Debug.Write(things);
-            }
-            Debug.WriteLine("\nNext");
-
-            foreach (var things in inputs)
-            {
-                Debug.Write(things + "/");
-            }
-            Debug.WriteLine("|");
             bedmas(0, tempList);
             inputs = tempList;
             printDisplay(inputs);
@@ -222,7 +206,6 @@ namespace Calculator
                 if (tempList[i] == ")") { break; }
                 if (tempList[i] == "+")
                 {
-                    Debug.WriteLine("Before and After i: " + tempList[i - 1] + ", " + tempList[i + 1]);
                     temp = double.Parse(tempList[i - 1]) + double.Parse(tempList[i + 1]);
                     tempList[i - 1] = temp.ToString();
                     tempList.RemoveAt(i);
@@ -279,25 +262,21 @@ namespace Calculator
                     {
                         if (e.KeyCode == Keys.D8 && e.Shift)
                         {
-                            Debug.Write("*");
                             opDo("x");
                             break;
                         }
                         else if (e.KeyCode == Keys.D9 && e.Shift)
                         {
-                            Debug.Write("(");
                             addLBDo();
                             break;
                         }
                         else if (e.KeyCode == Keys.D0 && e.Shift)
                         {
-                            Debug.Write("(");
                             addRBDo();
                             break;
                         }
                         else
                         {
-                            Debug.Write((int)(e.KeyCode - 48));
                             numDo(((int)(e.KeyCode - 48)).ToString());
                             break;
                         }
@@ -306,37 +285,31 @@ namespace Calculator
                     {
                         if (e.KeyCode == Keys.Oemplus && e.Shift)
                         {
-                            Debug.Write("+");
                             opDo("+");
                             break;
                         } else
                         {
-                            Debug.Write("=");
                             equalsDo();
                             break;
                         }
                     }
                 case Keys.OemMinus:
                     {
-                        Debug.Write("-");
                         opDo("-");
                         break;
                     }
                 case Keys.OemQuestion:
                     {
-                        Debug.Write("/");
                         opDo("/");
                         break;
                     }
                 case Keys.Back:
                     {
-                        Debug.Write("Backspace");
                         backspaceDo();
                         break;
                     }
                 case Keys.Delete:
                     {
-                        Debug.Write("Delete");
                         CEDo();
                         break;
                     }
@@ -354,6 +327,8 @@ namespace Calculator
             printDisplay(inputs);
         }
 
+        //Changes the current number to negative if currently positive 
+        //or positive if currently negative
         private void posNegClick(object sender, EventArgs e)
         {
             if (curNum == "")
@@ -472,6 +447,8 @@ namespace Calculator
         private void msClick(object sender, EventArgs e)
         {
             if (!on) { return; }
+            if (inputs.Count == 0)
+                return;
             if (curNum == "")
             {
                 memCalc = inputs[inputs.Count - 1];
@@ -486,7 +463,8 @@ namespace Calculator
         private void mplusClick(object sender, EventArgs e)
         {
             if (!on) { return; }
-            
+            if (inputs.Count == 0)
+                return;
             double tempMem = double.Parse(memCalc);
             if (curNum == "")
             {
