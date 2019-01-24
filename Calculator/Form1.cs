@@ -273,13 +273,13 @@ namespace Calculator
                         else if (e.KeyCode == Keys.D9 && e.Shift)
                         {
                             Debug.Write("(");
-                            addLeftBracket();
+                            addLBDo();
                             break;
                         }
                         else if (e.KeyCode == Keys.D0 && e.Shift)
                         {
                             Debug.Write("(");
-                            addRightBracket();
+                            addRBDo();
                             break;
                         }
                         else
