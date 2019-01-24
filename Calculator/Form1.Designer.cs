@@ -57,7 +57,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.backSpace = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button10 = new System.Windows.Forms.Button();
+            this.btnPosNeg = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
@@ -400,7 +400,7 @@
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.button10);
+            this.panel2.Controls.Add(this.btnPosNeg);
             this.panel2.Controls.Add(this.button2);
             this.panel2.Controls.Add(this.button1);
             this.panel2.Controls.Add(this.button3);
@@ -417,17 +417,17 @@
             this.panel2.Size = new System.Drawing.Size(200, 267);
             this.panel2.TabIndex = 26;
             // 
-            // button10
+            // btnPosNeg
             // 
-            this.button10.Location = new System.Drawing.Point(134, 202);
-            this.button10.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(52, 54);
-            this.button10.TabIndex = 10;
-            this.button10.TabStop = false;
-            this.button10.Text = "-+";
-            this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.posNegClick);
+            this.btnPosNeg.Location = new System.Drawing.Point(134, 202);
+            this.btnPosNeg.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnPosNeg.Name = "btnPosNeg";
+            this.btnPosNeg.Size = new System.Drawing.Size(52, 54);
+            this.btnPosNeg.TabIndex = 10;
+            this.btnPosNeg.TabStop = false;
+            this.btnPosNeg.Text = "-+";
+            this.btnPosNeg.UseVisualStyleBackColor = true;
+            this.btnPosNeg.Click += new System.EventHandler(this.posNegClick);
             // 
             // panel3
             // 
@@ -513,7 +513,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button btnPosNeg;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button backSpace;
     }

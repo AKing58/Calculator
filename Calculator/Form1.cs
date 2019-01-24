@@ -331,6 +331,13 @@ namespace Calculator
 
         }
 
+        //Performs the backspace function
+        private void backspaceClick(object sender, EventArgs e)
+        {
+            if (!on) { return; }
+            backspaceDo();
+        }
+
         // Removes last digit when backspace used
         private void backspaceDo()
         {
@@ -527,9 +534,6 @@ namespace Calculator
             printDisplay(inputs);
         }
 
-        private void backspaceClick(object sender, EventArgs e)
-        {
-            backspaceDo();
-        }
+        
     }
 }
