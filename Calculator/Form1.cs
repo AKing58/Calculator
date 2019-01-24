@@ -26,10 +26,9 @@ namespace Calculator
         static List<string> tempList = new List<string> { "" };
 
         String curNum = "";
-        double total;
         bool on = false;
         int bracketCount = 0;
-        String memCalc = "";
+        String memCalc = "0";
 
         public Form1()
         {
@@ -110,15 +109,14 @@ namespace Calculator
         private void equalsClick(object sender, EventArgs e)
         {
             if (!on) { return; }
-            if(curNum != "")
+
+            if (curNum != "")
             {
                 inputs.Add(curNum);
-                tempList.Add(curNum);
                 curNum = "";
             }
-
             tempList = inputs;
-
+            
             while (hasBracket(tempList))
             {
                 bedmas(findBracketLoc(tempList), tempList);
@@ -130,22 +128,27 @@ namespace Calculator
             }
             else if(curNum == "")
             {
-                if (inputs[inputs.Count - 1] == "+" ||
-                inputs[inputs.Count - 1] == "-" ||
-                inputs[inputs.Count - 1] == "x" ||
-                inputs[inputs.Count - 1] == "/") {
+                if (tempList[tempList.Count - 1] == "+" ||
+                tempList[tempList.Count - 1] == "-" ||
+                tempList[tempList.Count - 1] == "x" ||
+                tempList[tempList.Count - 1] == "/") {
                     inputs.RemoveAt(inputs.Count - 1);
                     tempList.RemoveAt(tempList.Count - 1);
                 }
                     
-            }else
-            {
-                inputs.Add(curNum);
-                tempList.Add(curNum);
-                curNum = "";
             }
-            
-            total = bedmas(0, tempList);
+            foreach (var things in tempList)
+            {
+                Debug.Write(things);
+            }
+            Debug.WriteLine("\nNext");
+
+            foreach (var things in inputs)
+            {
+                Debug.Write(things);
+            }
+            Debug.WriteLine("");
+            bedmas(0, tempList);
             inputs = tempList;
             printDisplay(inputs);
         }
@@ -159,6 +162,7 @@ namespace Calculator
                 tempList.RemoveAt(startLoc);
                 bracketCount--;
             }
+            
             for (i = startLoc; i < tempList.Count; i++)
             {
                 if(tempList[i] == ")") { break; }
@@ -338,30 +342,39 @@ namespace Calculator
         private void mcClick(object sender, EventArgs e)
         {
             if (!on) { return; }
-            memCalc = "";
+            memCalc = "0";
         }
 
         // Stores the current display to memory
         private void msClick(object sender, EventArgs e)
         {
             if (!on) { return; }
+
+            memCalc = curNum;
         }
 
         // Adds the current calculation to memory
         private void mplusClick(object sender, EventArgs e)
         {
-
+            if (!on) { return; }
+            
+            double tempMem = double.Parse(memCalc);
+            tempMem = tempMem + double.Parse(curNum);
+            memCalc = tempMem.ToString();
         }
 
         // Returns calculation from memory
         private void mrClick(object sender, EventArgs e)
         {
-
+            if (!on) { return; }
+            curNum = memCalc;
+            printDisplay(inputs);
         }
 
         private void CEClick(object sender, EventArgs e)
         {
-            if(curNum != "")
+            if (!on) { return; }
+            if (curNum != "")
             {
                 curNum = "";
             }
