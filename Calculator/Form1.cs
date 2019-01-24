@@ -102,7 +102,7 @@ namespace Calculator
                 }
                 else
                 {
-                    if (inputs[inputs.Count - 1] != ")")
+                    if (inputs[inputs.Count - 1] != ")" && curNum!="")
                     {
                         inputs.Add(curNum);
                         curNum = "";
@@ -158,7 +158,7 @@ namespace Calculator
 
             foreach (var things in inputs)
             {
-                Debug.Write(things);
+                Debug.Write(things+"/");
             }
             Debug.WriteLine("|");
             bedmas(0, tempList);
@@ -200,6 +200,7 @@ namespace Calculator
                 if (tempList[i] == ")") { break; }
                 if (tempList[i] == "+")
                 {
+                    Debug.WriteLine("Before and After i: " + tempList[i - 1] + ", " + tempList[i + 1]);
                     temp = double.Parse(tempList[i - 1]) + double.Parse(tempList[i + 1]);
                     tempList[i - 1] = temp.ToString();
                     tempList.RemoveAt(i);
