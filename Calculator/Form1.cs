@@ -53,6 +53,12 @@ namespace Calculator
         private void printDisplay(List<string> inputList)
         // Print function that copies the list to a single string
         {
+            if(inputList.Count==0 && curNum == "")
+            {
+                inputTxt.Text = "0";
+                return;
+            }
+                
             inputTxt.Text = "";
             if(curNum != "" && double.Parse(curNum)!=0)
                 curNum = curNum.TrimStart('0');
@@ -60,7 +66,9 @@ namespace Calculator
             {
                 inputTxt.Text += inputList[i];
             }
+            
             inputTxt.Text += curNum;
+            
         }
 
         // Adds numbers to the display
@@ -334,7 +342,9 @@ namespace Calculator
 
         private void backspaceDo()
         {
-            curNum = curNum.Remove(curNum.Length - 1);
+            if(curNum!="")
+                curNum = curNum.Remove(curNum.Length - 1);
+            
             printDisplay(inputs);
         }
 
@@ -487,15 +497,13 @@ namespace Calculator
         private void CEDo()
         {
             if(inputs.Count == 0)
-            {
                 return;
-            }
             if (inputs[inputs.Count - 1] != "+" &&
                 inputs[inputs.Count - 1] != "-" &&
                 inputs[inputs.Count - 1] != "x" &&
                 inputs[inputs.Count - 1] != "/")
                 inputs.RemoveAt(inputs.Count - 1);
-            curNum = "0";
+            curNum = "";
             printDisplay(inputs);
         }
     }
