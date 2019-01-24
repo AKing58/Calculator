@@ -174,6 +174,11 @@ namespace Calculator
                 }
 
             }
+            for (int i = 0; i < tempList.Count; i++)
+            {
+                if (tempList[tempList.Count - 1] == "0")
+                    tempList.RemoveAt(tempList.Count - 1);
+            }
             bedmas(0, tempList);
             inputs = tempList;
             printDisplay(inputs);
