@@ -56,10 +56,10 @@
             this.btnRightPar = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button11 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.backSpace = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -344,7 +344,7 @@
             // 
             // btnLeftPar
             // 
-            this.btnLeftPar.Location = new System.Drawing.Point(135, 12);
+            this.btnLeftPar.Location = new System.Drawing.Point(134, 75);
             this.btnLeftPar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnLeftPar.Name = "btnLeftPar";
             this.btnLeftPar.Size = new System.Drawing.Size(52, 54);
@@ -356,7 +356,7 @@
             // 
             // btnRightPar
             // 
-            this.btnRightPar.Location = new System.Drawing.Point(135, 75);
+            this.btnRightPar.Location = new System.Drawing.Point(135, 138);
             this.btnRightPar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnRightPar.Name = "btnRightPar";
             this.btnRightPar.Size = new System.Drawing.Size(52, 54);
@@ -369,6 +369,7 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.backSpace);
             this.panel1.Controls.Add(this.btnPlus);
             this.panel1.Controls.Add(this.btnRightPar);
             this.panel1.Controls.Add(this.btnClr);
@@ -387,7 +388,6 @@
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.button11);
             this.panel2.Controls.Add(this.button10);
             this.panel2.Controls.Add(this.button2);
             this.panel2.Controls.Add(this.button1);
@@ -404,18 +404,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(200, 267);
             this.panel2.TabIndex = 26;
-            // 
-            // button11
-            // 
-            this.button11.Location = new System.Drawing.Point(12, 202);
-            this.button11.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(52, 54);
-            this.button11.TabIndex = 28;
-            this.button11.TabStop = false;
-            this.button11.Text = ".";
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.decClick);
             // 
             // button10
             // 
@@ -453,6 +441,17 @@
             this.pictureBox1.TabIndex = 28;
             this.pictureBox1.TabStop = false;
             // 
+            // backSpace
+            // 
+            this.backSpace.Location = new System.Drawing.Point(134, 12);
+            this.backSpace.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.backSpace.Name = "backSpace";
+            this.backSpace.Size = new System.Drawing.Size(52, 54);
+            this.backSpace.TabIndex = 25;
+            this.backSpace.TabStop = false;
+            this.backSpace.Text = "DEL";
+            this.backSpace.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -472,6 +471,7 @@
             this.Name = "Form1";
             this.Text = "Calculator - Adam, Justin";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Click += new System.EventHandler(this.backspaceClick);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyPress);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
@@ -512,9 +512,9 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button backSpace;
     }
 }
 

@@ -82,7 +82,7 @@ namespace Calculator
 
         private void numDo(string numToAdd)
         {
-            if (inputs[inputs.Count - 1] == ")")
+            if (inputs.Count > 0 && inputs[inputs.Count - 1] == ")")
                 inputs.Add("x");
             curNum += numToAdd;
             printDisplay(inputs);
@@ -352,7 +352,13 @@ namespace Calculator
 
         private void posNegClick(object sender, EventArgs e)
         {
-
+            if (curNum == "")
+                return;
+            if (curNum.Substring(0, 1) != "-")
+                curNum = "-" + curNum;
+            else
+                curNum = curNum.TrimStart('-');
+            printDisplay(inputs);
         }
 
         /**
@@ -516,6 +522,11 @@ namespace Calculator
                 inputs.RemoveAt(inputs.Count - 1);
             curNum = "";
             printDisplay(inputs);
+        }
+
+        private void backspaceClick(object sender, EventArgs e)
+        {
+            backspaceDo();
         }
     }
 }
