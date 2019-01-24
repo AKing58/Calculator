@@ -486,6 +486,10 @@ namespace Calculator
 
         private void CEDo()
         {
+            if(inputs.Count == 0)
+            {
+                return;
+            }
             if (inputs[inputs.Count - 1] != "+" &&
                 inputs[inputs.Count - 1] != "-" &&
                 inputs[inputs.Count - 1] != "x" &&
